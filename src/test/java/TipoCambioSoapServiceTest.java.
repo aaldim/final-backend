@@ -1,0 +1,45 @@
+package com.example.demo.service;
+
+import com.example.demo.model.Solicitud;
+import com.example.demo.repository.SolicitudRepository;
+import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
+import org.springframework.boot.test.context.SpringBootTest;
+
+import java.util.Arrays;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.when;
+
+@SpringBootTest
+public class TipoCambioSoapServiceTest {
+
+    private final SolicitudRepository solicitudRepository = Mockito.mock(SolicitudRepository.class);
+    private final TipoCambioSoapService tipoCambioSoapService = new TipoCambioSoapService(solicitudRepository);
+
+    @Test
+    public void testObtenerHistorial() {
+        // Mock de datos
+        Solicitud solicitud1 = new Solicitud();
+        solicitud1.setId(1L);
+        solicitud1.setNumeroSolicitud("1234");
+        solicitud1.setFecha("2024-11-15");
+        solicitud1.setReferencia(7.85);
+
+        Solicitud solicitud2 = new Solicitud();
+        solicitud2.setId(2L);
+        solicitud2.setNumeroSolicitud("5678");
+        solicitud2.setFecha("2024-11-14");
+        solicitud2.setReferencia(7.84);
+
+        List<Solicitud> mockHistorial = Arrays.asList(solicitud1, solicitud2);
+        when(solicitudRepository.findAll()).thenReturn(mockHistorial);
+
+        // Validar el resultado
+        List<Solicitud> historial = tipoCambioSoapService.obtenerHistorial();
+        assertEquals(2, historial.size());
+        assertEquals("1234", historial.get(0).getNumeroSolicitud());
+        assertEquals(7.85, historial.get(0).getReferencia());
+    }
+}
