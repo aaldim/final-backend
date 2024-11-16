@@ -36,55 +36,60 @@ Antes de comenzar, asegúrate de tener instaladas las siguientes herramientas:
 
 ## Pasos para configurar y ejecutar el proyecto
 
-### 1. Clonar el repositorio
+### **1. Clonar el repositorio**
 Clona este repositorio en tu máquina local:
-```bash
-git clone <URL_DEL_REPOSITORIO>
-cd ApiFinalBackend
 
-2. Configurar la base de datos
+git clone https://github.com/aaldim/final-backend.git
+
+```cd ApiFinalBackend```
+
+### 2. Configurar la base de datos
 
 Abre el archivo src/main/resources/application.properties y asegúrate de configurar las credenciales correctas para PostgreSQL:
 
+```bash
 spring.datasource.url=jdbc:postgresql://<HOST>:<PUERTO>/<NOMBRE_BD>?sslmode=require
 spring.datasource.username=<USUARIO>
 spring.datasource.password=<CONTRASEÑA>
+```
 
 Ejemplo:
-
+```bash
 spring.datasource.url=jdbc:postgresql://localhost:5432/neondb
 spring.datasource.username=postgres
 spring.datasource.password=postgres
+```
 
-3. Construir el proyecto
+### 3. Construir el proyecto
 
 Compila y construye el proyecto utilizando Maven:
 
-mvn clean install
+```mvn clean install```
 
-4. Ejecutar la aplicación
+### ### 4. Ejecutar la aplicación
 
 Ejecuta la aplicación con el siguiente comando:
 
-mvn spring-boot:run
+```mvn spring-boot:run```
 
-5. Acceso a los endpoints
+### 5. Acceso a los endpoints
 
 Una vez que el servidor esté en ejecución (por defecto en el puerto 8080), puedes acceder a los siguientes endpoints:
 
 Obtener el tipo de cambio del día
 
-GET http://localhost:8080/tipoCambioDia
+```GET http://localhost:8080/tipoCambioDia```
 
 Obtener el historial de solicitudes
 
-GET http://localhost:8080/historial
+```GET http://localhost:8080/historial```
 
-6. Probar la API
+### 6. Probar la API
 
 Puedes probar los endpoints utilizando herramientas como Postman o cURL.
 
 Ejemplo con cURL:
 
-curl -X GET http://localhost:8080/tipoCambioDia -H "Accept: application/json"
-curl -X GET http://localhost:8080/historial -H "Accept: application/json"
+```curl -X GET http://localhost:8080/tipoCambioDia -H "Accept: application/json"```
+
+```curl -X GET http://localhost:8080/historial -H "Accept: application/json"```
